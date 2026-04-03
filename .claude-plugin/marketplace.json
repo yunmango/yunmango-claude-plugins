@@ -1,0 +1,14 @@
+{
+  "name": "yumango-plugins",
+  "owner": {
+    "name": "yunmango"
+  },
+  "plugins": [
+    {
+      "name": "yumango-plugins",
+      "source": "./plugin",
+      "description": "Reusable Claude Code skills and agents for planning and cross-verification workflows",
+      "version": "0.1.0"
+    }
+  ]
+}

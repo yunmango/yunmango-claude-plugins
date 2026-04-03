@@ -1,0 +1,10 @@
+{
+  "name": "yumango-plugins",
+  "description": "Reusable Claude Code skills and agents for planning and cross-verification workflows",
+  "version": "0.1.0",
+  "author": {
+    "name": "yunmango"
+  },
+  "repository": "https://github.com/yunmango/yumango-plugins",
+  "license": "MIT"
+}
