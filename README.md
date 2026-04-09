@@ -9,14 +9,24 @@ A Claude Code plugin providing reusable skills for planning and cross-verificati
 | `cross-plan` | Spawns Claude and Codex planners in parallel, then cross-verifies and synthesizes a final plan |
 | `plan-verify` | Claude Opus drafts a plan, then Codex GPT-5.4 independently verifies it against the codebase |
 
+## Prerequisites
+
+- [Codex CLI](https://github.com/openai/codex) 설치 필요 (both skills use Codex internally)
+
 ## Installation
 
-```bash
-# Add marketplace
-/plugin marketplace add yunmango/yunmango-claude-plugins
+### Local / Development
 
-# Install plugin
-/plugin install yumango-plugins
+```bash
+git clone https://github.com/yunmango/yunmango-claude-plugins.git
+claude --plugin-dir /path/to/yunmango-claude-plugins/plugin
+```
+
+### Marketplace
+
+```bash
+/plugin marketplace add yunmango/yunmango-claude-plugins
+/plugin install yumango-plugins@yunmango-claude-plugins
 ```
 
 ## Usage
