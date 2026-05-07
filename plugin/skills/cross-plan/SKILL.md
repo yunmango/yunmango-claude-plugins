@@ -127,7 +127,7 @@ Launch **both agents simultaneously** using two Agent tool calls in a single mes
 - **subagent_type**: `general-purpose`
 - **run_in_background**: `true`
 - **name**: `codex-planner`
-- **prompt**: Instruct the agent to run the bundled script. The script has the model (`gpt-5.5`) and reasoning effort (`xhigh`) hardcoded — the agent must NOT modify the script or run codex directly.
+- **prompt**: Instruct the agent to run the bundled script. The script has the model and reasoning effort hardcoded — the agent must NOT modify the script or run codex directly.
 
 ```
 You are a Codex agent coordinator. Your ONLY job is to run a shell script and return its output.
@@ -209,7 +209,7 @@ Save the **Final Integrated Plan** section as a markdown file in the plans direc
 <Final Integrated Plan content>
 
 ---
-*Cross-verified by Claude Opus 4.6 + GPT-5.5 (xhigh reasoning)*
+*Cross-verified by Claude Opus + Codex (xhigh reasoning)*
 ```
 
 Use the Write tool to save the file. The filename should follow the existing naming convention in `.claude/plans/` (kebab-case descriptive name).
