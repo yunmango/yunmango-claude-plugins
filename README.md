@@ -36,6 +36,10 @@ claude --plugin-dir /path/to/yunmango-claude-plugins/plugin
 /yumango-plugins:plan-verify <task description>
 ```
 
+## Documentation
+
+Full user guide (English / 한국어): <https://yunmango.github.io/yunmango-claude-plugins/>
+
 ## License
 
 MIT
