@@ -1,6 +1,6 @@
 ---
 name: plan-verify
-description: Sequential plan-then-verify workflow — Claude Opus drafts an implementation plan by exploring the codebase, then Codex GPT-5.4 (xhigh reasoning) independently verifies the plan against the actual code and returns a verdict (PASS / PASS_WITH_NOTES / NEEDS_REVISION). ALWAYS use this skill when the user wants a plan that is verified, validated, or reviewed by a second model. Trigger on any of these signals — explicit commands like "/plan-verify", Korean phrases like "계획 검증", "검증 계획", "계획 세우고 검증", or English phrases like "verified plan", "plan and verify", "validate the plan". Also trigger when the user asks to "plan something and have Codex/GPT check it", wants a "solid/robust/reliable plan", mentions wanting a plan "reviewed by another model", or says "계획 좀 단단하게". Do NOT trigger for simple planning without verification, cross-plan (parallel dual planning), direct Codex delegation, or code review of existing changes.
+description: Sequential plan-then-verify workflow — Claude Opus drafts an implementation plan by exploring the codebase, then Codex GPT-5.5 (xhigh reasoning) independently verifies the plan against the actual code and returns a verdict (PASS / PASS_WITH_NOTES / NEEDS_REVISION). ALWAYS use this skill when the user wants a plan that is verified, validated, or reviewed by a second model. Trigger on any of these signals — explicit commands like "/plan-verify", Korean phrases like "계획 검증", "검증 계획", "계획 세우고 검증", or English phrases like "verified plan", "plan and verify", "validate the plan". Also trigger when the user asks to "plan something and have Codex/GPT check it", wants a "solid/robust/reliable plan", mentions wanting a plan "reviewed by another model", or says "계획 좀 단단하게". Do NOT trigger for simple planning without verification, cross-plan (parallel dual planning), direct Codex delegation, or code review of existing changes.
 ---
 
 # Plan-Verify Skill
@@ -23,7 +23,7 @@ Claude Code (Team Lead)
     │     └── Explores codebase → returns structured plan
     │
     ├── Step 2: Codex Verifier (foreground)
-    │     └── codex:codex-rescue (gpt-5.4, xhigh)
+    │     └── codex:codex-rescue (gpt-5.5, xhigh)
     │     └── Verifies Claude's plan against actual codebase
     │     └── Returns verification report
     │
@@ -159,7 +159,7 @@ After receiving the Claude Planner's result, delegate verification to Codex.
 - **prompt**: Follow this format **exactly**:
 
 ```
---model gpt-5.4 --effort xhigh
+--model gpt-5.5 --effort xhigh
 
 This is a read-only review task. Do not modify any files.
 
@@ -167,7 +167,7 @@ This is a read-only review task. Do not modify any files.
 ```
 
 CRITICAL:
-- Always include `--model gpt-5.4 --effort xhigh` on the first line of the prompt.
+- Always include `--model gpt-5.5 --effort xhigh` on the first line of the prompt.
 - Always include "This is a read-only review task. Do not modify any files." Without this, Codex runs in write mode.
 - Do not change the model or effort level.
 - Replace `<TASK>` and `<CLAUDE_PLAN>` in the Verification Prompt Template with their actual values.
@@ -217,7 +217,7 @@ Save the final plan to a file.
 <Final Verified Plan content>
 
 ---
-*Planned by Claude Opus 4.6 · Verified by GPT-5.4 (xhigh reasoning)*
+*Planned by Claude Opus 4.6 · Verified by GPT-5.5 (xhigh reasoning)*
 ```
 
 After saving, present to the user:
@@ -235,6 +235,6 @@ Proceed with implementation based on this plan?
 
 - **Team lead = clarifier + synthesizer**: The team lead does not create its own plan. It clarifies requirements (Step 0) and synthesizes plan + verification results (Step 3).
 - **Sequential execution**: Codex Verifier runs only after Claude Planner completes. Not parallel.
-- **Fixed model**: Codex Verifier must use `gpt-5.4` model with `xhigh` effort. Do not change these.
+- **Fixed model**: Codex Verifier must use `gpt-5.5` model with `xhigh` effort. Do not change these.
 - **Codebase-grounded verification**: Codex verifies based on actual codebase exploration, not speculation.
 - **subagent_type**: Claude Planner uses `general-purpose`, Codex Verifier uses `codex:codex-rescue`.

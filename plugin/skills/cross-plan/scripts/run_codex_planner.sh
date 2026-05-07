@@ -8,7 +8,7 @@ set -euo pipefail
 # --- Fixed Configuration (DO NOT MODIFY) ---
 # Verified: `model_reasoning_effort` is a valid codex config key
 # (see ~/.codex/config.toml schema, confirmed with codex-cli v0.116.0)
-MODEL="gpt-5.4"
+MODEL="gpt-5.5"
 REASONING_EFFORT="xhigh"
 SANDBOX="read-only"
 # -------------------------------------------
