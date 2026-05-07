@@ -16,6 +16,27 @@ Two planners run **in parallel** — Claude and Codex — then Claude Code synth
 
 ## Flow
 
+```text
+              User
+               │
+               ▼
+           Team Lead ◄── clarify (if ambiguous)
+               │
+        parallel spawn (one message, two Agent calls)
+        ┌──────┴──────┐
+        ▼             ▼
+  claude-planner   codex-planner
+     (Opus)        (codex exec -s read-only)
+        │             │
+        └──────┬──────┘
+               ▼
+           Synthesize
+    consensus · divergence · unique
+               │
+               ▼
+     .claude/plans/<name>.md
+```
+
 ```mermaid
 flowchart TD
     User([User]):::actor --> Lead[Team Lead]:::lead
@@ -37,6 +58,16 @@ flowchart TD
     classDef io fill:#fef3c7,color:#78350f,stroke:#b45309;
     classDef store fill:#e2e8f0,color:#0f172a,stroke:#475569;
     classDef fork fill:#fff,color:#1e293b,stroke:#1e293b,stroke-dasharray: 4 2;
+```
+
+```text
+1. User           ── /cross-plan ──►  Team Lead
+2. Team Lead      ── spawn ──────►    claude-planner   ┐
+   Team Lead      ── spawn ──────►    codex-planner    ┘  parallel
+3. claude-planner ── Claude plan ──►  Team Lead         ┐
+   codex-planner  ── Codex plan ───►  Team Lead         ┘  await both
+4. Team Lead      (synthesize)
+5. Team Lead      ── final plan ──►   User
 ```
 
 ```mermaid

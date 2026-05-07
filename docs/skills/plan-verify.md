@@ -16,6 +16,31 @@ Claude Opus drafts a plan, then Codex (xhigh reasoning) verifies it against the 
 
 ## Flow
 
+```text
+              User
+               │
+               ▼
+           Team Lead ◄── clarify (if ambiguous)
+               │
+               ▼
+       Claude Planner (Opus)
+               │
+               ▼
+       Codex Verifier (gpt-5.5 · xhigh, read-only)
+               │
+        ┌──────┴──────┐
+        ▼             ▼
+      PASS    PASS_WITH_NOTES /
+        │     NEEDS_REVISION
+        │             │
+        │             ▼
+        │      Triage + revise
+        │             │
+        └──────┬──────┘
+               ▼
+     .claude/plans/<name>.md
+```
+
 ```mermaid
 flowchart TD
     User([User]):::actor --> Lead[Team Lead]:::lead
@@ -36,6 +61,16 @@ flowchart TD
     classDef decision fill:#fde68a,color:#78350f,stroke:#b45309;
     classDef io fill:#fef3c7,color:#78350f,stroke:#b45309;
     classDef store fill:#e2e8f0,color:#0f172a,stroke:#475569;
+```
+
+```text
+1. User           ── /plan-verify ──►  Team Lead
+2. Team Lead      ── plan ──────►      Claude Planner
+3. Claude Planner ── plan ──────►      Team Lead
+4. Team Lead      ── verify ────►      Codex Verifier   (read-only)
+5. Codex Verifier ── verdict + findings ──►  Team Lead
+6. Team Lead      (triage + revise, if not PASS)
+7. Team Lead      ── final plan ──►    User
 ```
 
 ```mermaid

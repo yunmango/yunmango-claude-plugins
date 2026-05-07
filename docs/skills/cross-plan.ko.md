@@ -16,6 +16,27 @@
 
 ## 흐름
 
+```text
+             사용자
+               │
+               ▼
+            팀 리드 ◄── 명확화 (모호한 경우)
+               │
+        병렬 spawn (한 메시지, Agent 호출 2개)
+        ┌──────┴──────┐
+        ▼             ▼
+  claude-planner   codex-planner
+     (Opus)        (codex exec -s read-only)
+        │             │
+        └──────┬──────┘
+               ▼
+              합성
+       합의 · 차이 · 고유
+               │
+               ▼
+     .claude/plans/<name>.md
+```
+
 ```mermaid
 flowchart TD
     User([사용자]):::actor --> Lead[팀 리드]:::lead
@@ -37,6 +58,16 @@ flowchart TD
     classDef io fill:#fef3c7,color:#78350f,stroke:#b45309;
     classDef store fill:#e2e8f0,color:#0f172a,stroke:#475569;
     classDef fork fill:#fff,color:#1e293b,stroke:#1e293b,stroke-dasharray: 4 2;
+```
+
+```text
+1. 사용자         ── /cross-plan ──►  팀 리드
+2. 팀 리드        ── spawn ──────►    claude-planner   ┐
+   팀 리드        ── spawn ──────►    codex-planner    ┘  병렬
+3. claude-planner ── Claude 계획 ──►  팀 리드           ┐
+   codex-planner  ── Codex 계획 ───►  팀 리드           ┘  양쪽 대기
+4. 팀 리드        (합성)
+5. 팀 리드        ── 최종 계획 ──►    사용자
 ```
 
 ```mermaid
