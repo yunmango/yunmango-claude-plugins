@@ -174,19 +174,37 @@ CRITICAL:
 
 ### Step 3: Synthesize Final Plan
 
-Combine both results into the final plan.
+The team lead does not blanket-accept Codex's findings — a final pass of judgment is required. Run Step 3a (triage) before Step 3b (build).
 
 #### If Verdict is PASS
 
-Adopt Claude's original plan as the final plan. Briefly mention the Confirmed section from Codex.
+Adopt Claude's original plan as the final plan. Briefly mention the Confirmed section from Codex. Step 3a/3b not required (no findings to triage).
 
-#### If Verdict is PASS_WITH_NOTES
+#### If Verdict is PASS_WITH_NOTES or NEEDS_REVISION
 
-Use Claude's plan as the base, incorporating the Gaps/Risks flagged by Codex. Clearly mark what was changed.
+Run Step 3a, then Step 3b.
 
-#### If Verdict is NEEDS_REVISION
+##### Step 3a: Triage Codex Findings
 
-Revise the plan to address all of Codex's findings. Show changes relative to the original in diff format.
+For each item listed under Gaps, Risks, and Ordering Issues, classify as one of:
+
+- **ACCEPT** — incorporate into the revised plan. Default disposition for codebase-grounded factual corrections (file paths, counts, function signatures, regex feasibility, ordering errors, etc.).
+- **ACCEPT_WITH_MODIFICATION** — incorporate but rephrase, narrow the scope, or split across plan steps. Use when the underlying concern is valid but the suggested mitigation is heavier than needed.
+- **REJECT** — do not incorporate. Permitted only when the finding is one of:
+  1. **Empirically wrong** — Codex misread the codebase. Spot-verify by reading the referenced file before classifying as REJECT on this ground.
+  2. **Out of scope** — contradicts the clarified requirements established in Step 0.
+  3. **Speculative** — Codex itself flagged the claim as unverified, or the finding is not grounded in concrete codebase evidence.
+  4. **Stylistic / taste** — diverges from established project conventions without functional impact.
+
+  Each REJECT must include a one-line justification.
+
+When unsure between ACCEPT and REJECT, read the relevant codebase file(s) to verify Codex's claim before classifying. Trust-but-verify is the default for high-impact items (architectural changes, regex correctness, ordering issues, missing dependencies).
+
+##### Step 3b: Build Revised Plan
+
+Apply ACCEPT and ACCEPT_WITH_MODIFICATION items into the 6-heading plan structure. REJECT items are surfaced separately in the output (see below) so the reviewer can see what was deliberately skipped and why.
+
+For NEEDS_REVISION, additionally show what changed relative to Claude's original plan (a brief change list, not a full diff).
 
 Output format:
 
@@ -199,6 +217,11 @@ Output format:
 - Confirmed: <summary of confirmed items>
 - Gaps: <gaps found> (if any)
 - Risks: <key risks> (if any)
+
+### Findings Triage  (omit when Verdict is PASS)
+- ACCEPT: <bullet list>
+- ACCEPT_WITH_MODIFICATION: <bullet list, each with a note on the modification>
+- REJECT: <bullet list, each with a one-line justification>
 
 ### Final Verified Plan
 <complete plan in the 6-heading format>
