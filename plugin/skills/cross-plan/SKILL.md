@@ -1,7 +1,7 @@
 ---
 name: cross-plan
-description: Cross-verification planning skill that spawns Claude and Codex planner agents in parallel, then the team lead synthesizes a verified plan. Use this when the user asks for cross-verification, dual planning, or wants to compare plans from multiple AI agents. Trigger on "cross plan", "cross verify", "교차검증", "dual plan", or "/cross-plan".
-invokable: true
+description: Cross-verification planning skill that spawns Claude and Codex planner agents in parallel, then the team lead synthesizes a verified plan. Invoked only via the explicit "/cross-plan" slash command — automatic model invocation is disabled.
+disable-model-invocation: true
 ---
 
 # Cross-Plan Skill

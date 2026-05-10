@@ -1,6 +1,7 @@
 ---
 name: plan-verify
-description: Sequential plan-then-verify workflow — Claude Opus drafts an implementation plan by exploring the codebase, then Codex (xhigh reasoning) independently verifies the plan against the actual code and returns a verdict (PASS / PASS_WITH_NOTES / NEEDS_REVISION). ALWAYS use this skill when the user wants a plan that is verified, validated, or reviewed by a second model. Trigger on any of these signals — explicit commands like "/plan-verify", Korean phrases like "계획 검증", "검증 계획", "계획 세우고 검증", or English phrases like "verified plan", "plan and verify", "validate the plan". Also trigger when the user asks to "plan something and have Codex/GPT check it", wants a "solid/robust/reliable plan", mentions wanting a plan "reviewed by another model", or says "계획 좀 단단하게". Do NOT trigger for simple planning without verification, cross-plan (parallel dual planning), direct Codex delegation, or code review of existing changes.
+description: Sequential plan-then-verify workflow — Claude Opus drafts an implementation plan by exploring the codebase, then Codex (xhigh reasoning) independently verifies the plan against the actual code and returns a verdict (PASS / PASS_WITH_NOTES / NEEDS_REVISION). Invoked only via the explicit "/plan-verify" slash command — automatic model invocation is disabled.
+disable-model-invocation: true
 ---
 
 # Plan-Verify Skill
