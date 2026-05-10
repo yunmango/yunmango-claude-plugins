@@ -1,7 +1,7 @@
 {
   "name": "yumango-plugins",
   "description": "Reusable Claude Code skills and agents for planning and cross-verification workflows",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": {
     "name": "yunmango"
   },
