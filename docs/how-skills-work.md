@@ -45,6 +45,7 @@ Subagents are spawned with the `Agent` tool — `general-purpose` for the Claude
 
 | Skill | File |
 | --- | --- |
+| `deep-interview` | `plugin/skills/deep-interview/SKILL.md` |
 | `cross-plan` | `plugin/skills/cross-plan/SKILL.md` |
 | `plan-verify` | `plugin/skills/plan-verify/SKILL.md` |
 

@@ -26,9 +26,21 @@ codex --version
     claude --plugin-dir /path/to/yunmango-claude-plugins/plugin
     ```
 
-`/help`로 확인 — `yumango-plugins:cross-plan`과 `yumango-plugins:plan-verify`가 보여야 합니다.
+`/help`로 확인 — `yumango-plugins:deep-interview`, `yumango-plugins:cross-plan`, `yumango-plugins:plan-verify`가 보여야 합니다.
 
 ## 실행
+
+### 선택: 의도 먼저 명확화
+
+요청이 모호하면 `deep-interview`로 시작해 명세부터 만든 뒤 계획으로 넘어가세요:
+
+```
+/yumango-plugins:deep-interview 우리 백엔드를 좀 정리하고 싶어
+```
+
+출력물(Goal / In-scope / Out-of-scope / Constraints / Done / Assumptions / Open questions)이 아래 계획 skill에 그대로 입력됩니다.
+
+### 계획
 
 === "병렬 교차검증"
 

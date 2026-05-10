@@ -45,6 +45,7 @@ Claude가 본문을 읽고 절차처럼 실행합니다. 이 플러그인의 ski
 
 | Skill | 파일 |
 | --- | --- |
+| `deep-interview` | `plugin/skills/deep-interview/SKILL.md` |
 | `cross-plan` | `plugin/skills/cross-plan/SKILL.md` |
 | `plan-verify` | `plugin/skills/plan-verify/SKILL.md` |
 

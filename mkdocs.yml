@@ -1,5 +1,5 @@
 site_name: yumango-plugins
-site_description: User guide for the yumango-plugins Claude Code plugin (cross-plan, plan-verify)
+site_description: User guide for the yumango-plugins Claude Code plugin (deep-interview, cross-plan, plan-verify)
 site_url: https://yunmango.github.io/yunmango-claude-plugins/
 repo_url: https://github.com/yunmango/yunmango-claude-plugins
 repo_name: yunmango/yunmango-claude-plugins
@@ -58,6 +58,7 @@ plugins:
             Getting Started: 시작하기
             How Skills Work: Skill 작동 원리
             Skills: Skills
+            deep-interview: deep-interview
             cross-plan: cross-plan
             plan-verify: plan-verify
 
@@ -95,6 +96,7 @@ nav:
   - Getting Started: getting-started.md
   - How Skills Work: how-skills-work.md
   - Skills:
+      - deep-interview: skills/deep-interview.md
       - cross-plan: skills/cross-plan.md
       - plan-verify: skills/plan-verify.md
 

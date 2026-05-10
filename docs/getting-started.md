@@ -26,9 +26,21 @@ codex --version
     claude --plugin-dir /path/to/yunmango-claude-plugins/plugin
     ```
 
-Confirm installation with `/help` — `yumango-plugins:cross-plan` and `yumango-plugins:plan-verify` should appear.
+Confirm installation with `/help` — `yumango-plugins:deep-interview`, `yumango-plugins:cross-plan`, and `yumango-plugins:plan-verify` should appear.
 
 ## Run
+
+### Optional: clarify intent first
+
+If the request is vague, start with `deep-interview` to crystallize it into a spec before planning:
+
+```
+/yumango-plugins:deep-interview improve our backend somehow
+```
+
+The output (Goal / In-scope / Out-of-scope / Constraints / Done / Assumptions / Open questions) feeds directly into the planning skills below.
+
+### Plan
 
 === "Parallel cross-verify"
 
