@@ -1,6 +1,6 @@
 ---
 name: plan-verify
-description: Sequential plan-then-verify workflow — Claude Opus drafts an implementation plan by exploring the codebase, then Codex (xhigh reasoning) independently verifies the plan against the actual code and returns a verdict (PASS / PASS_WITH_NOTES / NEEDS_REVISION). Invoked only via the explicit "/plan-verify" slash command — automatic model invocation is disabled.
+description: Sequential plan-then-verify workflow — Claude Opus drafts an implementation plan by exploring the codebase, then Codex (gpt-5.5, xhigh reasoning, fast mode) independently verifies the plan against the actual code and returns a verdict (PASS / PASS_WITH_NOTES / NEEDS_REVISION). Invoked only via the explicit "/plan-verify" slash command — automatic model invocation is disabled.
 disable-model-invocation: true
 ---
 
@@ -24,7 +24,7 @@ Claude Code (Team Lead)
     │     └── Explores codebase → returns structured plan
     │
     ├── Step 2: Codex Verifier (foreground)
-    │     └── codex:codex-rescue (xhigh reasoning)
+    │     └── runs codex exec -s read-only (gpt-5.5, xhigh, fast mode)
     │     └── Verifies Claude's plan against actual codebase
     │     └── Returns verification report
     │
@@ -120,6 +120,7 @@ One of: PASS | PASS_WITH_NOTES | NEEDS_REVISION
 If NEEDS_REVISION, list the specific items that must be addressed before implementation.
 
 IMPORTANT: Base your verification ONLY on what you find in the codebase. Do NOT speculate. If you cannot verify a claim, say so explicitly.
+Your FINAL message must contain the complete verification report and nothing else. Do NOT end with a tool call, follow-up question, or summary — output the full report as your last message.
 ```
 
 ## Execution Flow
@@ -153,25 +154,47 @@ Store the result as `<CLAUDE_PLAN>`.
 
 ### Step 2: Codex Verifier (Foreground)
 
-After receiving the Claude Planner's result, delegate verification to Codex.
+After receiving the Claude Planner's result, delegate verification to a Codex subagent that runs the bundled script. The script has the model, reasoning effort, sandbox, and fast mode hardcoded — the agent must NOT modify the script or run codex directly.
 
-- **subagent_type**: `codex:codex-rescue`
+- **subagent_type**: `general-purpose`
 - **run_in_background**: `false`
-- **prompt**: Follow this format **exactly**:
+- **name**: `codex-verifier`
+- **prompt**: Instruct the agent to run the bundled script:
 
 ```
---model gpt-5.5 --effort xhigh
+You are a Codex agent coordinator. Your ONLY job is to run a shell script and return its output.
 
-This is a read-only review task. Do not modify any files.
+CRITICAL: Do NOT run codex directly. Do NOT change the model name or flags. Use ONLY the bundled script below.
 
-<Verification Prompt Template with <TASK> and <CLAUDE_PLAN> replaced>
+1. Create a temp directory and write the verification prompt to a file:
+   WORK_DIR="/tmp/codex-verifier-$(date +%s)"
+   mkdir -p "$WORK_DIR"
+   Write the full verification prompt to "$WORK_DIR/prompt.txt" using the Write tool.
+
+   The verification prompt is the Verification Prompt Template with `<TASK>` and `<CLAUDE_PLAN>` replaced with the actual values.
+
+   IMPORTANT: The verification prompt MUST end with the following instruction:
+   "Your FINAL message must contain the complete verification report and nothing else. Do NOT end with a tool call, follow-up question, or summary — output the full report as your last message."
+   This is required because the `-o` flag captures only the last message from the agent.
+
+2. Run the bundled script (DO NOT MODIFY THIS COMMAND):
+   bash <SKILL_DIR>/scripts/run_codex_verifier.sh "$WORK_DIR/prompt.txt" "$WORK_DIR/report.md" "<project_root>"
+
+   Where <SKILL_DIR> is the directory containing SKILL.md (use the path from which you read this skill).
+   Where <project_root> is the project root directory.
+
+3. Read "$WORK_DIR/report.md" and return the FULL content.
+   If the script failed, read "$WORK_DIR/report.stderr.log" and return the error.
+
+4. Clean up: rm -rf "$WORK_DIR"
+
+IMPORTANT: Do NOT generate a verification report yourself. Do NOT run codex CLI directly. Only run the script and return its output verbatim.
 ```
 
 CRITICAL:
-- Always include `--model gpt-5.5 --effort xhigh` on the first line of the prompt.
-- Always include "This is a read-only review task. Do not modify any files." Without this, Codex runs in write mode.
-- Do not change the model or effort level.
-- Replace `<TASK>` and `<CLAUDE_PLAN>` in the Verification Prompt Template with their actual values.
+- The script hardcodes `--model gpt-5.5`, `model_reasoning_effort=xhigh`, `--enable fast_mode`, and `-s read-only`. Do not change them.
+- Replace `<TASK>` and `<CLAUDE_PLAN>` in the Verification Prompt Template with their actual values before writing the prompt file.
+- The script runs `codex exec` directly (not the codex-rescue subagent), so progress UX is silent until completion.
 
 ### Step 3: Synthesize Final Plan
 
@@ -241,7 +264,7 @@ Save the final plan to a file.
 <Final Verified Plan content>
 
 ---
-*Planned by Claude Opus · Verified by Codex (xhigh reasoning)*
+*Planned by Claude Opus · Verified by Codex gpt-5.5 (xhigh reasoning, fast mode)*
 ```
 
 After saving, present to the user:
@@ -259,6 +282,6 @@ Proceed with implementation based on this plan?
 
 - **Team lead = clarifier + synthesizer**: The team lead does not create its own plan. It clarifies requirements (Step 0) and synthesizes plan + verification results (Step 3).
 - **Sequential execution**: Codex Verifier runs only after Claude Planner completes. Not parallel.
-- **Fixed model**: Codex Verifier must use the model and effort specified in Step 2's prompt template. Do not change them.
+- **Fixed model & flags**: Codex Verifier uses the bundled script which hardcodes `gpt-5.5`, `xhigh` reasoning, `read-only` sandbox, and `--enable fast_mode`. Do not modify the script or run codex directly.
 - **Codebase-grounded verification**: Codex verifies based on actual codebase exploration, not speculation.
-- **subagent_type**: Claude Planner uses `general-purpose`, Codex Verifier uses `codex:codex-rescue`.
+- **subagent_type**: Both Claude Planner and Codex Verifier use `general-purpose`. Codex Verifier runs the bundled `scripts/run_codex_verifier.sh`.

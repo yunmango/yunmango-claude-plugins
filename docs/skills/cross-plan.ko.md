@@ -26,7 +26,8 @@
         ┌──────┴──────┐
         ▼             ▼
   claude-planner   codex-planner
-     (Opus)        (codex exec -s read-only)
+     (Opus)        (gpt-5.5 · xhigh · fast,
+                    codex exec -s read-only)
         │             │
         └──────┬──────┘
                ▼
@@ -45,7 +46,7 @@ flowchart TD
     Q -- 아니오 --> Spawn(("병렬 spawn")):::fork
     Lead --> Spawn
     Spawn --> CP[claude-planner<br/>Opus]:::agent
-    Spawn --> XP[codex-planner<br/>codex -s read-only]:::agent
+    Spawn --> XP[codex-planner<br/>gpt-5.5 · xhigh · fast]:::agent
     CP --> Merge[합성<br/>합의 · 차이 · 고유]:::lead
     XP --> Merge
     Merge --> Save[(.claude/plans/&lt;name&gt;.md)]:::store

@@ -1,6 +1,6 @@
 # plan-verify
 
-Claude Opus drafts a plan, then Codex (xhigh reasoning) verifies it against the codebase and returns a verdict.
+Claude Opus drafts a plan, then Codex (gpt-5.5, xhigh reasoning, fast mode) verifies it against the codebase and returns a verdict.
 
 ```
 /yumango-plugins:plan-verify <task description>
@@ -26,7 +26,7 @@ Claude Opus drafts a plan, then Codex (xhigh reasoning) verifies it against the 
        Claude Planner (Opus)
                │
                ▼
-       Codex Verifier (gpt-5.5 · xhigh, read-only)
+       Codex Verifier (gpt-5.5 · xhigh · fast, read-only)
                │
         ┌──────┴──────┐
         ▼             ▼
@@ -47,7 +47,7 @@ flowchart TD
     Lead --> Q{Ambiguous?}:::decision
     Q -- yes --> Ask[/Ask user/]:::io --> Lead
     Q -- no --> CP[Claude Planner<br/>Opus]:::agent
-    CP --> CV[Codex Verifier<br/>gpt-5.5 · xhigh]:::agent
+    CP --> CV[Codex Verifier<br/>gpt-5.5 · xhigh · fast]:::agent
     CV --> V{Verdict}:::decision
     V -- PASS --> Adopt[Adopt original plan]:::lead
     V -- "PASS_WITH_NOTES /<br/>NEEDS_REVISION" --> Triage[Triage findings]:::lead --> Build[Revise plan]:::lead

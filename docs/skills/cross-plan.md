@@ -26,7 +26,8 @@ Two planners run **in parallel** — Claude and Codex — then Claude Code synth
         ┌──────┴──────┐
         ▼             ▼
   claude-planner   codex-planner
-     (Opus)        (codex exec -s read-only)
+     (Opus)        (gpt-5.5 · xhigh · fast,
+                    codex exec -s read-only)
         │             │
         └──────┬──────┘
                ▼
@@ -45,7 +46,7 @@ flowchart TD
     Q -- no --> Spawn(("parallel spawn")):::fork
     Lead --> Spawn
     Spawn --> CP[claude-planner<br/>Opus]:::agent
-    Spawn --> XP[codex-planner<br/>codex -s read-only]:::agent
+    Spawn --> XP[codex-planner<br/>gpt-5.5 · xhigh · fast]:::agent
     CP --> Merge[Synthesize<br/>consensus · divergence · unique]:::lead
     XP --> Merge
     Merge --> Save[(.claude/plans/&lt;name&gt;.md)]:::store
