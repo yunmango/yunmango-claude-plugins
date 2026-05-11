@@ -1,4 +1,4 @@
-# yumango-plugins
+# yunmango-plugins
 
 A Claude Code plugin for **clarifying intent and cross-verifying plans** — before you write any code.
 

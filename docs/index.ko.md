@@ -1,4 +1,4 @@
-# yumango-plugins
+# yunmango-plugins
 
 **의도 명확화와 교차검증 계획 수립**용 Claude Code 플러그인 — 코드를 쓰기 전에 사용.
 

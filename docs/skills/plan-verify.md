@@ -3,7 +3,7 @@
 Claude Opus drafts a plan, then Codex (gpt-5.5, xhigh reasoning, fast mode) verifies it against the codebase and returns a verdict.
 
 ```
-/yumango-plugins:plan-verify <task description>
+/yunmango-plugins:plan-verify <task description>
 ```
 
 ## Pick the right skill

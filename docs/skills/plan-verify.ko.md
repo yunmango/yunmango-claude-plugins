@@ -3,7 +3,7 @@
 Claude Opus가 계획을 작성하고, Codex(gpt-5.5, xhigh reasoning, fast mode)가 코드베이스 대비 검증해 verdict을 반환합니다.
 
 ```
-/yumango-plugins:plan-verify <작업 설명>
+/yunmango-plugins:plan-verify <작업 설명>
 ```
 
 ## 어느 skill이 맞나

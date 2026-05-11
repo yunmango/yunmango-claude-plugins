@@ -3,7 +3,7 @@
 두 플래너(Claude, Codex)를 **병렬로** 돌린 뒤 Claude Code가 하나의 계획으로 합성합니다.
 
 ```
-/yumango-plugins:cross-plan <작업 설명>
+/yunmango-plugins:cross-plan <작업 설명>
 ```
 
 ## 어느 skill이 맞나

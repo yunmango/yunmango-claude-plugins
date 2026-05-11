@@ -3,7 +3,7 @@
 모호한 요청을 계획 수립 **이전에** Socratic 질문으로 명세화합니다.
 
 ```
-/yumango-plugins:deep-interview <대략적 요청>
+/yunmango-plugins:deep-interview <대략적 요청>
 ```
 
 ## 언제 쓰나
@@ -22,7 +22,7 @@
              사용자
                │
                ▼
-   /yumango-plugins:deep-interview <대략적 요청>
+   /yunmango-plugins:deep-interview <대략적 요청>
                │
                ▼
    가장 모호한 축 선택 (Goal → Scope → Constraints → Done → Context)
@@ -138,7 +138,7 @@ Question: {질문 하나}
 
 ## 호출
 
-`disable-model-invocation: true` — 명시적 `/yumango-plugins:deep-interview` 슬래시 명령으로만 트리거됩니다. 자연어로는 모델이 자동 호출하지 않습니다.
+`disable-model-invocation: true` — 명시적 `/yunmango-plugins:deep-interview` 슬래시 명령으로만 트리거됩니다. 자연어로는 모델이 자동 호출하지 않습니다.
 
 ## 원본
 

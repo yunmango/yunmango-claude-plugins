@@ -1,4 +1,4 @@
-# yumango-plugins
+# yunmango-plugins
 
 A Claude Code plugin providing reusable skills for planning and cross-verification workflows.
 
@@ -26,14 +26,14 @@ claude --plugin-dir /path/to/yunmango-claude-plugins/plugin
 
 ```bash
 /plugin marketplace add yunmango/yunmango-claude-plugins
-/plugin install yumango-plugins@yunmango-claude-plugins
+/plugin install yunmango-plugins@yunmango-claude-plugins
 ```
 
 ## Usage
 
 ```bash
-/yumango-plugins:cross-plan <task description>
-/yumango-plugins:plan-verify <task description>
+/yunmango-plugins:cross-plan <task description>
+/yunmango-plugins:plan-verify <task description>
 ```
 
 ## Documentation

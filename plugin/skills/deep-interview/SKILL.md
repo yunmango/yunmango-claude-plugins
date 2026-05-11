@@ -89,7 +89,7 @@ At the end, output only the sections below — not the full transcript. The lead
 - {item} — {`blocker` | `safe to assume X` | `defer`}
 
 📍 Next:
-- Plan with Codex verification: `/yumango-plugins:plan-verify`
-- Parallel Claude × Codex planning: `/yumango-plugins:cross-plan`
+- Plan with Codex verification: `/yunmango-plugins:plan-verify`
+- Parallel Claude × Codex planning: `/yunmango-plugins:cross-plan`
 - Enter Claude's Plan Mode: paste the `## Task` paragraph (plus any sections you want to carry over) into your next message.
 ```

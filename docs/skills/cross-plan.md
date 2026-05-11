@@ -3,7 +3,7 @@
 Two planners run **in parallel** — Claude and Codex — then Claude Code synthesizes a single plan from both.
 
 ```
-/yumango-plugins:cross-plan <task description>
+/yunmango-plugins:cross-plan <task description>
 ```
 
 ## Pick the right skill

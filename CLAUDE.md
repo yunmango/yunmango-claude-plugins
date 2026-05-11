@@ -1,4 +1,4 @@
-# yumango-plugins
+# yunmango-plugins
 
 A Claude Code plugin for reusable skills and agents — planning, cross-verification, and more.
 
@@ -27,7 +27,7 @@ drafts/                      ← Development workspace (NOT distributed)
 ## Testing
 
 - Test plugin locally: `claude --plugin-dir ./plugin`
-- Plugin skills are namespaced: `/yumango-plugins:<skill-name>`
+- Plugin skills are namespaced: `/yunmango-plugins:<skill-name>`
 
 ## Distribution
 
@@ -35,6 +35,6 @@ drafts/                      ← Development workspace (NOT distributed)
 - Install:
   ```
   /plugin marketplace add yunmango/yunmango-claude-plugins
-  /plugin install yumango-plugins@yunmango-claude-plugins
+  /plugin install yunmango-plugins@yunmango-claude-plugins
   ```
 - Only `plugin/` directory is distributed — `drafts/` and `.claude/` are excluded

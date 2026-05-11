@@ -16,7 +16,7 @@ codex --version
 
     ```bash
     /plugin marketplace add yunmango/yunmango-claude-plugins
-    /plugin install yumango-plugins@yunmango-claude-plugins
+    /plugin install yunmango-plugins@yunmango-claude-plugins
     ```
 
 === "Local / dev"
@@ -26,7 +26,7 @@ codex --version
     claude --plugin-dir /path/to/yunmango-claude-plugins/plugin
     ```
 
-Confirm installation with `/help` — `yumango-plugins:deep-interview`, `yumango-plugins:cross-plan`, and `yumango-plugins:plan-verify` should appear.
+Confirm installation with `/help` — `yunmango-plugins:deep-interview`, `yunmango-plugins:cross-plan`, and `yunmango-plugins:plan-verify` should appear.
 
 ## Run
 
@@ -35,7 +35,7 @@ Confirm installation with `/help` — `yumango-plugins:deep-interview`, `yumango
 If the request is vague, start with `deep-interview` to crystallize it into a spec before planning:
 
 ```
-/yumango-plugins:deep-interview improve our backend somehow
+/yunmango-plugins:deep-interview improve our backend somehow
 ```
 
 The output (Goal / In-scope / Out-of-scope / Constraints / Done / Assumptions / Open questions) feeds directly into the planning skills below.
@@ -45,13 +45,13 @@ The output (Goal / In-scope / Out-of-scope / Constraints / Done / Assumptions / 
 === "Parallel cross-verify"
 
     ```
-    /yumango-plugins:cross-plan add a /healthz endpoint that reports DB and Redis status
+    /yunmango-plugins:cross-plan add a /healthz endpoint that reports DB and Redis status
     ```
 
 === "Plan-then-verify"
 
     ```
-    /yumango-plugins:plan-verify add a /healthz endpoint that reports DB and Redis status
+    /yunmango-plugins:plan-verify add a /healthz endpoint that reports DB and Redis status
     ```
 
 Either skill will:

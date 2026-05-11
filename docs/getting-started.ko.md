@@ -16,7 +16,7 @@ codex --version
 
     ```bash
     /plugin marketplace add yunmango/yunmango-claude-plugins
-    /plugin install yumango-plugins@yunmango-claude-plugins
+    /plugin install yunmango-plugins@yunmango-claude-plugins
     ```
 
 === "로컬 / 개발"
@@ -26,7 +26,7 @@ codex --version
     claude --plugin-dir /path/to/yunmango-claude-plugins/plugin
     ```
 
-`/help`로 확인 — `yumango-plugins:deep-interview`, `yumango-plugins:cross-plan`, `yumango-plugins:plan-verify`가 보여야 합니다.
+`/help`로 확인 — `yunmango-plugins:deep-interview`, `yunmango-plugins:cross-plan`, `yunmango-plugins:plan-verify`가 보여야 합니다.
 
 ## 실행
 
@@ -35,7 +35,7 @@ codex --version
 요청이 모호하면 `deep-interview`로 시작해 명세부터 만든 뒤 계획으로 넘어가세요:
 
 ```
-/yumango-plugins:deep-interview 우리 백엔드를 좀 정리하고 싶어
+/yunmango-plugins:deep-interview 우리 백엔드를 좀 정리하고 싶어
 ```
 
 출력물(Goal / In-scope / Out-of-scope / Constraints / Done / Assumptions / Open questions)이 아래 계획 skill에 그대로 입력됩니다.
@@ -45,13 +45,13 @@ codex --version
 === "병렬 교차검증"
 
     ```
-    /yumango-plugins:cross-plan DB와 Redis 상태를 보고하는 /healthz 엔드포인트 추가
+    /yunmango-plugins:cross-plan DB와 Redis 상태를 보고하는 /healthz 엔드포인트 추가
     ```
 
 === "계획 후 검증"
 
     ```
-    /yumango-plugins:plan-verify DB와 Redis 상태를 보고하는 /healthz 엔드포인트 추가
+    /yunmango-plugins:plan-verify DB와 Redis 상태를 보고하는 /healthz 엔드포인트 추가
     ```
 
 어느 skill이든:

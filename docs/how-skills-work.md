@@ -24,7 +24,7 @@ description: ... Trigger on "cross plan", "교차검증", "/cross-plan".
 
 | Path | Example |
 | --- | --- |
-| Slash command | `/yumango-plugins:cross-plan add /healthz endpoint` |
+| Slash command | `/yunmango-plugins:cross-plan add /healthz endpoint` |
 | Natural language | *"plan this and have Codex verify it"* → `plan-verify` |
 | Negative match | "Do NOT trigger for code review" — keeps overlapping skills apart |
 

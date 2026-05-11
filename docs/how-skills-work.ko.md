@@ -24,7 +24,7 @@ description: ... Trigger on "cross plan", "교차검증", "/cross-plan".
 
 | 경로 | 예시 |
 | --- | --- |
-| 슬래시 명령 | `/yumango-plugins:cross-plan /healthz 엔드포인트 추가` |
+| 슬래시 명령 | `/yunmango-plugins:cross-plan /healthz 엔드포인트 추가` |
 | 자연어 | *"이거 계획 세우고 Codex가 검증하게 해줘"* → `plan-verify` |
 | 부정 매칭 | "Do NOT trigger for code review" — 겹치는 skill끼리 침범 방지 |
 

@@ -3,7 +3,7 @@
 Crystallize an ambiguous request into a clear specification through Socratic questioning — **before** any planning step.
 
 ```
-/yumango-plugins:deep-interview <rough request>
+/yunmango-plugins:deep-interview <rough request>
 ```
 
 ## When to use
@@ -22,7 +22,7 @@ Crystallize an ambiguous request into a clear specification through Socratic que
               User
                │
                ▼
-   /yumango-plugins:deep-interview <rough request>
+   /yunmango-plugins:deep-interview <rough request>
                │
                ▼
    pick most unclear axis (Goal → Scope → Constraints → Done → Context)
@@ -138,7 +138,7 @@ The clear separation of **user-confirmed intent** vs **assumptions** is what the
 
 ## Invocation
 
-`disable-model-invocation: true` — only the explicit `/yumango-plugins:deep-interview` slash command triggers this skill. The model will not auto-invoke it from natural language.
+`disable-model-invocation: true` — only the explicit `/yunmango-plugins:deep-interview` slash command triggers this skill. The model will not auto-invoke it from natural language.
 
 ## Source
 
