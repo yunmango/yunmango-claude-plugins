@@ -31,10 +31,10 @@ drafts/                      ← Development workspace (NOT distributed)
 
 ## Distribution
 
-- Published via GitHub: `yunmango/yumango-plugins`
+- Published via GitHub: `yunmango/yunmango-claude-plugins`
 - Install:
   ```
-  /plugin marketplace add yunmango/yumango-plugins
-  /plugin install yumango-plugins
+  /plugin marketplace add yunmango/yunmango-claude-plugins
+  /plugin install yumango-plugins@yunmango-claude-plugins
   ```
 - Only `plugin/` directory is distributed — `drafts/` and `.claude/` are excluded
